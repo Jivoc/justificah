@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Justificaih! - Analise</title>
+</head>
+<body>
+
+    <h1>Justificativas Abertas</h1>
+    
+  
+    <article th:each="justificativa : ${justificativas}" th:object="${justificativa}">
+        <form action="#" th:action="@{/analisar/alterar}" method="post">
+            <input type="hidden" name="codigo" th:value="*{codigo}">
+            <p>
+                <label for="cidadao">Cidadão:</label>
+                <text th:text="*{cidadao.nome}">nome do cidadao</text>
+                <input type="hidden" name="cidadao.codigo" th:value="*{cidadao.codigo}">
+		
+                </p>
+            <p>
+                <label for="eleicao">Eleição:</label>
+                <span th:text="*{eleicao.descricao}">2020</span>
+                <input type="hidden" name="eleicao.codigo" th:value="*{eleicao.codigo}">
+            </p>
+            <p>
+                <label for="conteudo">Justificativa:</label>
+                <span th:text="*{conteudo}">Não disponivel</span>   
+                <input type="hidden" name="conteudo" th:value="*{conteudo}">
+            </p>
+            
+            <p>
+                <label for="juiz">Juiz:</label>
+                <select id="juiz" name="juiz">
+				<option th:each="juiz : ${juizes}" th:value="${juiz.codigo}" th:text="${juiz.nome}">Selecionar Juiz</option>
+				</select>
+            </p>
+            <p>
+                <label for="stringJustificar">Análise:</label>
+                <select id="stringJustificar" name="stringJustificar">
+                    <option >Aceita</option>
+                    <option >Negada</option>
+                </select>
+            </p>
+            <input type="submit" value="Justificar">    
+        </form>
+        
+    </article>
+    <br>
+    <br>
+    
+        
+    <a href="#" th:href="@{/}">Voltar</a>

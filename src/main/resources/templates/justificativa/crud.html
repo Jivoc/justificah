@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>Justificaih! - Justificando </title>
+</head>
+<body>
+	<h1>Justificando</h1>
+	
+	<h2 th:if="${#lists.isEmpty(eleicoes)}" th:text="${mensagemeleicoes}">Não foram encontradas eleicões em ativas</h2>
+
+	<h2 th:if="${#lists.isEmpty(cidadaos)}" th:text="${mensagemcidadaos}">Não foram encontrados cidadãos ativos</h2>
+
+	<form action="#" th:action="@{/justificar/novo}" method="post">
+		<label for="cidadao">Cidadão:</label>
+		<select id="cidadao" name="cidadao">
+			<option th:each="cidadao : ${cidadaos}" th:value="${cidadao.codigo}" th:text="${cidadao.nome}">Vazio</option>
+		</select>
+		<br>
+		<br>
+		<label for="eleicao">Eleição</label>
+		<select id="eleicao" name="eleicao">
+			<option th:each="eleicao : ${eleicoes}" th:value="${eleicao.codigo}" th:text="${eleicao.descricao}">Vazio</option>
+		</select>
+		<br>
+		<br>
+		<label for="justificativa">Justificativa:</label>
+		<textarea id="conteudo" name="conteudo" rows="4" cols="50"></textarea>
+		<br>
+		<br>
+		<input type="submit" value="Justificar">
+	</form>
+	<br>
+	<a href="#" th:href="@{/index.html}" >Voltar</a>
+
+</body>
+</html>
